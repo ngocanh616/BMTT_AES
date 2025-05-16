@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-6">
+        <div class="card mb-5">
+            <div class="card-header">
+                <h3 class="mb-0 text-white">
+                    <i class="bi bi-key-fill me-2"></i>
+                    Mã hóa/Giải mã AES
+                </h3>
+            </div>
+            <div class="card-body">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show d-flex align-items-center">
+                                <i class="bi bi-{{ 'exclamation-triangle-fill' if category == 'error' else 'check-circle-fill' }} me-2 fs-4"></i>
+                                <div>{{ message }}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST" enctype="multipart/form-data" id="aesForm">
+                    <div class="mb-4">
+                        <label for="file" class="form-label">
+                            <i class="bi bi-file-earmark-arrow-up me-2"></i>
+                            Chọn file cần xử lý
+                        </label>
+                        <div class="file-upload-wrapper">
+                            <input class="form-control" type="file" id="file" name="file" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="key_size" class="form-label">
+                            <i class="bi bi-gear-fill me-2"></i>
+                            Độ mạnh mã hóa
+                        </label>
+                        <select class="form-select" id="key_size" name="key_size" required>
+                            <option value="128">AES-128 (Bảo mật cơ bản)</option>
+                            <option value="192">AES-192 (Bảo mật nâng cao)</option>
+                            <option value="256">AES-256 (Bảo mật quân sự)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="key" class="form-label">
+                            <i class="bi bi-key me-2"></i>
+                            Khóa bí mật
+                        </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="key" name="key" 
+                                   placeholder="Nhập khóa bí mật của bạn" required>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-text mt-2" id="keyHint">
+                            <i class="bi bi-info-circle me-1"></i>
+                            Khuyến nghị: Nhập ít nhất 8 ký tự đa dạng cho AES-128
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label d-block mb-3">
+                            <i class="bi bi-toggle-on me-2"></i>
+                            Chọn chế độ
+                        </label>
+                        <div class="btn-group w-100 shadow-sm" role="group">
+                            <input type="radio" class="btn-check" name="operation" id="encrypt" value="encrypt" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary d-flex align-items-center justify-content-center" for="encrypt">
+                                <i class="bi bi-lock-fill me-2"></i> Mã hóa
+                            </label>
+
+                            <input type="radio" class="btn-check" name="operation" id="decrypt" value="decrypt" autocomplete="off">
+                            <label class="btn btn-outline-success d-flex align-items-center justify-content-center" for="decrypt">
+                                <i class="bi bi-unlock-fill me-2"></i> Giải mã
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">
+                        <i class="bi bi-lightning-charge-fill me-2"></i>
+                        Xử lý ngay
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card bg-light">
+            <div class="card-body text-center text-muted">
+                <i class="bi bi-shield-check fs-1 mb-3"></i>
+                <h5 class="mb-3">Bảo mật đẳng cấp</h5>
+                <p class="small">Hệ thống sử dụng thuật toán AES tiêu chuẩn với khóa được bảo vệ an toàn</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('key_size').addEventListener('change', function() {
+    const size = this.value;
+    let hint = '';
+    let icon = '<i class="bi bi-info-circle me-1"></i>';
+    
+    if (size === '128') {
+        hint = 'Khuyến nghị: Nhập ít nhất 8 ký tự đa dạng cho AES-128';
+    } else if (size === '192') {
+        hint = 'Khuyến nghị: Nhập ít nhất 12 ký tự đa dạng cho AES-192';
+    } else {
+        hint = 'Khuyến nghị: Nhập ít nhất 16 ký tự đa dạng cho AES-256';
+    }
+    
+    document.getElementById('keyHint').innerHTML = icon + hint;
+});
+
+// Toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordInput = document.getElementById('key');
+    const icon = this.querySelector('i');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye');
+    }
+});
+</script>
+{% endblock %}

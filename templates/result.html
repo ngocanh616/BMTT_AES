@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h3 class="mb-0">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    {{ operation }} thành công
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info d-flex align-items-center">
+                    <i class="bi bi-info-circle-fill me-3 fs-4"></i>
+                    <div>
+                        <p class="mb-1"><strong>File gốc:</strong> {{ original_file }}</p>
+                        <p class="mb-0"><strong>File kết quả:</strong> {{ result_file }}</p>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5 class="d-flex align-items-center mb-3">
+                        <i class="bi bi-file-text-fill me-2"></i>
+                        Nội dung kết quả
+                    </h5>
+                    <div class="preview-box shadow-sm">
+                        <pre>{{ result_content }}</pre>
+                    </div>
+                </div>
+                
+                <div class="d-grid gap-3">
+                    <a href="{{ url_for('download', filename=result_file) }}" class="btn btn-success btn-lg py-3">
+                        <i class="bi bi-download me-2"></i>
+                        Tải file kết quả
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-lg py-3">
+                        <i class="bi bi-arrow-repeat me-2"></i>
+                        Thực hiện thao tác khác
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card bg-light">
+            <div class="card-body text-center">
+                <i class="bi bi-shield-lock fs-1 text-primary mb-3"></i>
+                <h5>Dữ liệu của bạn đã được bảo mật</h5>
+                <p class="text-muted">Hệ thống đã xử lý thành công yêu cầu của bạn với thuật toán AES-{{ key_size }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
