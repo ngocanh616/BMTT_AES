@@ -30,18 +30,27 @@ python app.py
 📝 Cách sử dụng
 
 🌐 Truy cập ứng dụng thông qua trình duyệt web (mặc định:http://127.0.0.1:5000)
+
 🔄 Chọn chế độ mã hóa hoặc giải mã
+
 ✏️ Nhập văn bản cần xử lý
+
 🔑 Nhập khóa bảo mật (secret key)
+
 ⚙️ Tùy chọn: Cấu hình thêm các tham số khác như chế độ mã hóa, vector khởi tạo
+
 🖱️ Nhấn nút "Mã hóa" hoặc "Giải mã" để thực hiện thao tác
+
 ✅ Kết quả sẽ được hiển thị trên giao diện
 
 🛠️ Công nghệ sử dụng
 
 🐍 Python: Ngôn ngữ lập trình back-end
+
 🌶️ Flask: Framework web để xây dựng ứng dụng
+
 🎨 Bootstrap: Tạo giao diện responsive
+
 📜 JavaScript: Xử lý mã hóa/giải mã phía client
 
 🔒 Bảo mật
@@ -51,47 +60,29 @@ python app.py
 🔐 Sử dụng HTTPS để bảo vệ dữ liệu trong quá trình truyền tải (khi triển khai)
 👁️ Mã nguồn mở, có thể kiểm tra tính toàn vẹn của ứng dụng
 
-🔱 Fork repository
-🌿 Tạo branch mới (git checkout -b feature/amazing-feature)
-✅ Commit các thay đổi (git commit -m 'Add some amazing feature')
-📤 Push lên branch (git push origin feature/amazing-feature)
-🔃 Mở Pull Request
-
 📞 Liên hệ
 Ngoc Anh - @ngocanh616
 Link dự án: https://github.com/ngocanh616/BMTT_AES
 
 📂 **CẤU TRÚC DỰ ÁN BMTT_AES**
 
+
 BMTT_AES/
 │
-├── 📜 app.py                 # Điểm khởi chạy chính của ứng dụng Flask
-│   # Xử lý routing, điều phối request và response
+├── app.py                # Entry point của ứng dụng Flask
+├── templates/            # Thư mục chứa các template HTML
+│   ├── index.html        # Trang chính
+│   ├── base.html         # Template cơ sở cho giao diện
+│   ├── error.html        # Trang hiển thị lỗi
+│   └── result.html       # Trang hiển thị kết quả
 │
-├── 📁 templates/             # Thư mục chứa giao diện người dùng
-│   ├── 📄 base.html          # Template base (layout chung)
-│   ├── 📄 index.html         # Trang chính - Giao diện chọn chức năng
-│   ├── 📄 encryption.html    # Trang mã hóa dữ liệu
-│   ├── 📄 decryption.html    # Trang giải mã dữ liệu  
-│   └── 📄 result.html        # Hiển thị kết quả xử lý
-│   └── 📄 error.html         # Xử lý lỗi và thông báo
+├── static/               # Thư mục chứa các file tĩnh
+│   └── style.css         # Stylesheet và Bootstrap
 │
-├── 📁 static/                # Tài nguyên tĩnh
-│   └── 📁 css/
-│       └── 📄 style.css      # File CSS tùy chỉnh
-│   # 📌 Lưu ý: Thêm thư mục js/ nếu có JavaScript
+├── aes/                  # Các module chức năng
+│   ├── decryption.py     # Module xử lý giải mã AES
+│   ├── encryption.py     # Module xử lý mã hóa AES
+│   └── utils.py          # Các hàm tiện ích
 │
-├── 📁 aes/                   # Module xử lý mã hóa
-│   ├── 📄 encryption.py      # Logic mã hóa AES
-│   │   # Chứa các hàm: generate_key(), encrypt_data()
-│   │
-│   ├── 📄 decryption.py      # Logic giải mã AES  
-│   │   # Chứa các hàm: validate_key(), decrypt_data()
-│   │
-│   └── 📄 utils.py           # Tiện ích hỗ trợ
-│       # Xử lý padding, conversion, error handling
-│
-├── 📄 requirements.txt       # Danh sách thư viện cần cài đặt
-│   # Flask, PyCryptodome, etc.
-│
-└── 📄 README.md              # Tài liệu hướng dẫn dự án
+├── requirements.txt      # Danh sách các dependency
+└── README.md             # Tài liệu hướng dẫn
