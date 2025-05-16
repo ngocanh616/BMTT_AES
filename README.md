@@ -1,8 +1,11 @@
 🚀 BMTT_AES - Bộ Công Cụ Mã Hóa AES Đa Năng
+
 📋 Tổng quan
+
 Web AES Crypto là một ứng dụng web cho phép người dùng mã hóa và giải mã dữ liệu bằng cách sử dụng thuật toán AES. Được xây dựng với Python, Flask và Bootstrap, ứng dụng cung cấp giao diện trực quan, dễ sử dụng, và thực hiện các thao tác mã hóa an toàn.
 
 ✨ Tính năng
+
 🔒 Mã hóa văn bản bằng thuật toán AES-128, AES-192, hoặc AES-256
 🔓 Giải mã văn bản đã được mã hóa
 🔄 Hỗ trợ nhiều chế độ mã hóa khác nhau (CBC, CFB, OFB, CTR)
@@ -12,6 +15,7 @@ Web AES Crypto là một ứng dụng web cho phép người dùng mã hóa và 
 🛡️ Xử lý bảo mật dữ liệu người dùng
 
 🚀 Cài đặt
+
 Clone repository:
 git clone https://github.com/ngocanh616/BMTT_AES.git
 Di chuyển vào thư mục dự án:
@@ -22,6 +26,7 @@ Chạy ứng dụng:
 flask run
 hoặc
 python app.py
+
 📝 Cách sử dụng
 
 🌐 Truy cập ứng dụng thông qua trình duyệt web (mặc định:http://127.0.0.1:5000)
